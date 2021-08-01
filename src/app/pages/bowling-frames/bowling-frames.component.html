@@ -1,0 +1,27 @@
+<div class="score-board shadow">
+<!-- button and pin logic-->
+  <app-bowling-pins [pins]="pins" (selectedPin)="addPin($event)"></app-bowling-pins>
+  <!-- Score board logic-->
+  <div class="grid">
+    <div class="container" *ngFor="let frame of frames; let index= index">
+      <h2 class="text-center">{{index + 1}}</h2>
+      <div class="flex frame js-center"
+           [ngClass]="{'active': frame.active }"
+           (click)="switchFrame(index)"
+      >
+        <div class="score flex" *ngFor="let item of frame.frame; let index= index; trackBy:trackById">
+          <p class="frame">
+            <span>{{ item}}</span>
+          </p>
+        </div>
+      </div>
+      <h3 class="no text-center" *ngIf="frame?.score && frame?.showScore">{{frame?.score}}</h3>
+    </div>
+  </div>
+
+  <h1 class="score-result">Score: {{score}}</h1>
+</div>
+
+
+
+
